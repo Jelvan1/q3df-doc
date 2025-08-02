@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Build
         uses: xu-cheng/latex-action@v2
@@ -29,7 +29,7 @@ jobs:
           latexmk_shell_escape: true
           latexmk_use_lualatex: true
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: artifact
           path: main.pdf
@@ -43,14 +43,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - uses: actions/download-artifact@v3
-        with:
-          name: artifact
-          path: bin/
+      - uses: actions/download-artifact@v4
 
-      - uses: actions/github-script@v6
+      - uses: actions/github-script@v7
         id: script
         with:
           script: |
@@ -91,13 +88,13 @@ jobs:
               console.log(`Updated \`latest\` tag`);
             }
 
-      - uses: softprops/action-gh-release@v1
+      - uses: softprops/action-gh-release@v2
         with:
           body: "Quake III DeFRaG Physics"
           draft: false
           prerelease: false
           files: |
-            bin/main.pdf
+            artifact/main.pdf
           name: Latest pdf
           tag_name: latest
           token: ${{ secrets.GITHUB_TOKEN }}
