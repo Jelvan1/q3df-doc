@@ -95,6 +95,5 @@ jobs:
           prerelease: false
           files: |
             artifact/main.pdf
-          name: Latest pdf
+          name: Latest PDF
           tag_name: latest
-          token: ${{ secrets.GITHUB_TOKEN }}
